@@ -103,10 +103,6 @@ class SignalScope[T]:
 # ---------------------------------------------------------------------------- #
 
 class Computed[T](ReadonlySignal[T], SignalScope[T]):
-    """
-    use `@computed` decorator instead to auto destroy (via implicit Context)
-    """
-
     def __init__(self, fn: Callable[[], T]):
         SignalScope.__init__(self, fn)
 
@@ -128,10 +124,6 @@ class Computed[T](ReadonlySignal[T], SignalScope[T]):
 # ---------------------------------------------------------------------------- #
 
 class Effect(SignalScope[Callable | None]):
-    """
-    use `@effect` decorator instead to auto destroy (via implicit Context)
-    """
-
     __cleanup: Callable | None
 
     def __init__(self, fn: Callable[[], Callable | None]):

@@ -1,7 +1,7 @@
 import tkinter as tk
 from typing import Any, Callable, Iterable
 
-from ..core.helper import Diff
+from ..core.helper import Diff, memo
 from ..core.node.component import component
 from ..core.node.tk import TKNode
 from ..core.node.types import Child_Prop, Children
@@ -63,10 +63,17 @@ def dynamic_foreach_renderer[T](
             return _children
 
         @Computed
-        def diff():
-            nonlocal prev
-            _diff = Diff(prev, data())
-            prev = _diff.next()
+        @memo
+        def diff(prev: Diff[T] | None):
+            _diff = Diff(
+                prev.next() if prev else [],
+                data(),
+            )
+
+            # nothing changed
+            if prev and _diff.size() == 0:
+                return prev
+
             return _diff
 
         @Effect
