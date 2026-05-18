@@ -37,6 +37,7 @@ def Select[V](
 ):
 
     def render(parent: Node) -> Node:
+        # dual binding
         var = to_string_var(parent, options.current)
         name = var.trace_add('write', lambda a, b, c: options.select(var.get()))
         on_destroy(lambda: var.trace_remove("write", name))
