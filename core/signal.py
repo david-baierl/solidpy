@@ -3,10 +3,10 @@ from typing import Callable
 from core.event.subject import Subject
 
 # ---------------------------------------------------------------------------- #
-# base class
+# readonly signal (base class)
 # ---------------------------------------------------------------------------- #
 
-class InternalSignalBase[T](Subject[T]):
+class ReadonlySignal[T](Subject[T]):
     """@internal: Use `ReadonlySignal[T]` (or `Signal[T]`) instead"""
 
     __value: T
@@ -38,17 +38,10 @@ class InternalSignalBase[T](Subject[T]):
         return self.__value
 
 # ---------------------------------------------------------------------------- #
-# readonly signal
-# ---------------------------------------------------------------------------- #
-
-class ReadonlySignal[T](InternalSignalBase[T]):
-    ...
-
-# ---------------------------------------------------------------------------- #
 # signal
 # ---------------------------------------------------------------------------- #
 
-class Signal[T](InternalSignalBase[T]):
+class Signal[T](ReadonlySignal[T]):
 
     def set(self, value: T) -> None:
         self._set(value)
@@ -78,7 +71,7 @@ class SignalScope[T]:
 
         return value
 
-    def add_dependency(self, parent: InternalSignalBase):
+    def add_dependency(self, parent: ReadonlySignal):
         name = repr(id(parent))
 
         # allready subscribed
@@ -103,7 +96,7 @@ class SignalScope[T]:
 # computed
 # ---------------------------------------------------------------------------- #
 
-class Computed[T](InternalSignalBase[T], SignalScope[T]):
+class Computed[T](ReadonlySignal[T], SignalScope[T]):
     """
     use `@computed` decorator instead to auto destroy (via implicit Context)
     """
@@ -112,7 +105,7 @@ class Computed[T](InternalSignalBase[T], SignalScope[T]):
         SignalScope.__init__(self, fn)
 
         # @hint: use super().run() to skip self._set() the first time
-        InternalSignalBase.__init__(self, super()._run())
+        ReadonlySignal.__init__(self, super()._run())
 
     def _run(self):
         value = super()._run()

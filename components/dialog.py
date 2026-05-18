@@ -31,7 +31,7 @@ def create_dialog(
         on_close()
 
     # @HINT: zoom
-    # root.tk.call('tk', 'scaling', '-displayof', '.', 2)
+    root.tk.call('tk', 'scaling', '-displayof', '.', 2)
 
     with ctx().scope() as s:
 
