@@ -1,12 +1,12 @@
 import tkinter as tk
-from typing import Any, Callable, Iterable, Sequence
+from typing import Any, Callable, Iterable
 
-from ..core.helper import Diff, computed, effect
+from ..core.helper import Diff
 from ..core.node.component import component
 from ..core.node.tk import TKNode
 from ..core.node.types import Child_Prop, Children
 from ..core.node.virtual import Node, VirtualNode
-from ..core.signal import ReadonlySignal
+from ..core.signal import Accessor, Computed, Effect
 
 @component
 def Foreach[T](
@@ -32,7 +32,7 @@ def Foreach[T](
     return TKNode(render)
 
 def dynamic_foreach_renderer[T](
-    data: ReadonlySignal[list[T]],
+    data: Accessor[list[T]],
     children: Child_Prop[[T, int]],
     pack: Callable[[VirtualNode, int, int], None],
 
@@ -62,14 +62,14 @@ def dynamic_foreach_renderer[T](
 
             return _children
 
-        @computed
+        @Computed
         def diff():
             nonlocal prev
             _diff = Diff(prev, data())
             prev = _diff.next()
             return _diff
 
-        @effect
+        @Effect
         def update():
             next = diff().next()
             removed = diff().removed()
@@ -99,7 +99,7 @@ def dynamic_foreach_renderer[T](
 
 @component
 def Foreach_Dynamic[T](
-    data: ReadonlySignal[list[T]],
+    data: Accessor[list[T]],
     children: Child_Prop[[T, int]],
 
     styles: dict[str, Any] = {},

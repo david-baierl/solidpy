@@ -1,6 +1,12 @@
 from typing import Callable
 
+from .context import ctx
+from .event.helper import on
+from .event.types import DestroyEvent
+
 from .event.subject import Subject
+
+type Accessor[T] = Callable[[], T]
 
 # ---------------------------------------------------------------------------- #
 # readonly signal (base class)
@@ -107,6 +113,11 @@ class Computed[T](ReadonlySignal[T], SignalScope[T]):
         # @hint: use super().run() to skip self._set() the first time
         ReadonlySignal.__init__(self, super()._run())
 
+        try:
+            ctx().subscribe(on(DestroyEvent, lambda _: self.destroy()))
+        except:
+            pass
+
     def _run(self):
         value = super()._run()
         self._set(value)
@@ -127,6 +138,11 @@ class Effect(SignalScope[Callable | None]):
         self.__cleanup = None
         SignalScope.__init__(self, fn)
         self._run()
+
+        try:
+            ctx().subscribe(on(DestroyEvent, lambda _: self.destroy()))
+        except:
+            pass
 
     def _clear(self):
         if self.__cleanup != None:

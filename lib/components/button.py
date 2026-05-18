@@ -2,13 +2,13 @@ import tkinter as tk
 
 from ..core.helper import to_string_var
 from ..core.node.virtual import Node
-from ..core.signal import ReadonlySignal
+from ..core.signal import Accessor
 from ..core.node.tk import TKNode
 from ..core.node.component import component
 
 @component
 def Button(
-    textvariable: ReadonlySignal[str] | None = None,
+    textvariable: Accessor[str] | None = None,
 
     *args,
     **kwargs,

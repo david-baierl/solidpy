@@ -5,54 +5,37 @@ from .context import ctx
 from .event.helper import on
 from .event.types import DestroyEvent
 from .node.virtual import Node
-from .signal import Computed, Effect, ReadonlySignal
+from .signal import Accessor, Effect
 
 # --------------------------------------------
-# decorators
+# lifetime
 # --------------------------------------------
 
-def computed[T](fn: Callable[[], T]) -> Computed[T]:
-    _computed = Computed(fn)
-
-    ctx().subscribe(on(
-        DestroyEvent,
-        lambda _: _computed.destroy(),
-    ))
-
-    return _computed
-
-def effect(fn: Callable[[], Callable | None]) -> Effect:
-    _effect = Effect(fn)
-
-    ctx().subscribe(on(
-        DestroyEvent,
-        lambda _: _effect.destroy(),
-    ))
-
-    return _effect
+def on_destroy(fn: Callable[[], None]) -> None:
+    ctx().subscribe(on(DestroyEvent, lambda _: fn()))
 
 # --------------------------------------------
 # tkinter specific converter
 # --------------------------------------------
 
-def to_string_var(root: Node | None, signal: ReadonlySignal[str]) -> tk.StringVar:
+def to_string_var(root: Node | None, value: Accessor[str]) -> tk.StringVar:
     var = tk.StringVar(root)
-    effect(lambda: var.set(signal()))
+    Effect(lambda: var.set(value()))
     return var
 
-def to_bool_var(root: Node, signal: ReadonlySignal[bool]) -> tk.BooleanVar:
+def to_bool_var(root: Node, value: Accessor[bool]) -> tk.BooleanVar:
     var = tk.BooleanVar(root)
-    effect(lambda: var.set(signal()))
+    Effect(lambda: var.set(value()))
     return var
 
-def to_int_var(root: Node, signal: ReadonlySignal[int]) -> tk.IntVar:
+def to_int_var(root: Node, value: Accessor[int]) -> tk.IntVar:
     var = tk.IntVar(root)
-    effect(lambda: var.set(signal()))
+    Effect(lambda: var.set(value()))
     return var
 
-def to_float_var(root: Node, signal: ReadonlySignal[float]) -> tk.DoubleVar:
+def to_float_var(root: Node, value: Accessor[float]) -> tk.DoubleVar:
     var = tk.DoubleVar(root)
-    effect(lambda: var.set(signal()))
+    Effect(lambda: var.set(value()))
     return var
 
 # --------------------------------------------

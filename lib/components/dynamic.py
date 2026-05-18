@@ -1,12 +1,12 @@
 import tkinter as tk
 from typing import Any
 
-from ..core.helper import effect
+from ..core.helper import Effect
 from ..core.node.component import component
 from ..core.node.tk import TKNode
 from ..core.node.types import Child_Prop, Children
 from ..core.node.virtual import Node
-from ..core.signal import ReadonlySignal
+from ..core.signal import Accessor
 
 vertical = {
     "side": tk.TOP,
@@ -28,7 +28,7 @@ inline = {
 
 @component
 def Dynamic[T](
-    data: ReadonlySignal[T],
+    data: Accessor[T],
     children: Child_Prop[T],
     styles: dict[str, Any] = {},
 
@@ -40,7 +40,7 @@ def Dynamic[T](
         cache: Children = []
         frame = tk.Frame(root, *args, **kwargs)
 
-        @effect
+        @Effect
         def update():
             nonlocal cache
             item = data()

@@ -3,9 +3,8 @@ from lib.components.dialog import DIALOG_CONTEXT, create_dialog
 from lib.components.frame import Frame
 from lib.components.label import Label
 from lib.core.context import Context, ctx
-from lib.core.helper import computed
 from lib.core.node.component import component
-from lib.core.signal import Signal
+from lib.core.signal import Computed, Signal
 
 @component
 def App():
@@ -15,7 +14,7 @@ def App():
 
     counter = Signal(0)
 
-    @computed
+    @Computed
     def text():
         return f"count: {counter()}"
 

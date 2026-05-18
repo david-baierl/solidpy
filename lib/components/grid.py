@@ -6,7 +6,7 @@ from ..core.node.component import component
 from ..core.node.tk import TKNode
 from ..core.node.types import Child_Prop, Child_Prop_2D
 from ..core.node.virtual import Node, VirtualNode
-from ..core.signal import ReadonlySignal
+from ..core.signal import Accessor
 
 @component
 def Grid(
@@ -40,7 +40,7 @@ def Grid(
 
 @component
 def Grid_Dynamic[T](
-    data: ReadonlySignal[list[T]],
+    data: Accessor[list[T]],
     children: Child_Prop[[T, int]],
     rotate: bool = False,
 
