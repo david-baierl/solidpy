@@ -1,6 +1,6 @@
 from typing import Callable, Literal
 
-from core.event.subject import Subject
+from .subject import Subject
 
 type EventBubble = Literal['none', 'upstream', 'downstream']
 type EventHandler[T: Event] = Callable[[T], None]

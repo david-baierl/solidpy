@@ -1,7 +1,6 @@
 from typing import Callable, Sequence
 
-from core.node.virtual import VirtualNode
-
+from .virtual import VirtualNode
 
 type ChildNode = VirtualNode | None
 type Children = Sequence[ChildNode]

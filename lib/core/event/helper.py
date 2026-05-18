@@ -1,6 +1,6 @@
 import tkinter as tk
 from typing import Callable
-from core.event.event import Event, EventHandler
+from .event import Event, EventHandler
 
 # ignores events that bubble up from children
 # like <Destroy>

@@ -1,8 +1,8 @@
 import tkinter as tk
 from typing import Any, Callable
 
-from core.event.types import DestroyEvent
-from core.node.virtual import VirtualNode
+from ..event.types import DestroyEvent
+from .virtual import VirtualNode
 
 type Node = tk.Widget
 

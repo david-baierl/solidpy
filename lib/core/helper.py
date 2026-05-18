@@ -1,11 +1,11 @@
 import tkinter as tk
 from typing import Callable
 
-from core.context import ctx
-from core.event.helper import bind_direct, on
-from core.event.types import DestroyEvent
-from core.node.virtual import Node
-from core.signal import Computed, Effect, ReadonlySignal
+from .context import ctx
+from .event.helper import on
+from .event.types import DestroyEvent
+from .node.virtual import Node
+from .signal import Computed, Effect, ReadonlySignal
 
 # --------------------------------------------
 # decorators

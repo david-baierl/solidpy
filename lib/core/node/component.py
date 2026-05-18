@@ -1,7 +1,7 @@
-from typing import Callable, Protocol
+from typing import Callable
 
-from core.context import ctx
-from core.node.virtual import Node, VirtualNode
+from ..context import ctx
+from .virtual import Node, VirtualNode
 
 class ComponentNode(VirtualNode):
     __child: VirtualNode

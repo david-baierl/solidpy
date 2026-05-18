@@ -2,11 +2,11 @@ from dataclasses import dataclass
 import tkinter as tk
 from typing import Callable
 
-from core.context import ctx
-from core.event.helper import bind_direct, on
-from core.event.types import DestroyEvent
-from core.injectable import Injectable
-from core.node.component import Component
+from ..core.context import ctx
+from ..core.event.helper import bind_direct, on
+from ..core.event.types import DestroyEvent
+from ..core.injectable import Injectable
+from ..core.node.component import Component
 
 WIDTH = 600
 HEIGHT = 400

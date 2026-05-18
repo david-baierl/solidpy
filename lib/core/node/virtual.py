@@ -1,9 +1,9 @@
 from abc import abstractmethod
 import tkinter as tk
 
-from core.context import Context, ctx
-from core.event.helper import on
-from core.event.types import DestroyEvent
+from ..context import Context, ctx
+from ..event.helper import on
+from ..event.types import DestroyEvent
 
 type Node = tk.Widget
 

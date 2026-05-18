@@ -1,12 +1,12 @@
 import tkinter as tk
 from typing import Any
 
-from components.foreach import dynamic_foreach_renderer
-from core.node.component import component
-from core.node.tk import TKNode
-from core.node.types import Child_Prop, Child_Prop_2D
-from core.node.virtual import Node, VirtualNode
-from core.signal import ReadonlySignal
+from .foreach import dynamic_foreach_renderer
+from ..core.node.component import component
+from ..core.node.tk import TKNode
+from ..core.node.types import Child_Prop, Child_Prop_2D
+from ..core.node.virtual import Node, VirtualNode
+from ..core.signal import ReadonlySignal
 
 @component
 def Grid(

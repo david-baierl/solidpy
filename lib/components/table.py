@@ -1,10 +1,10 @@
 import tkinter as tk
 from typing import Any, Iterable
 
-from core.node.component import component
-from core.node.tk import TKNode
-from core.node.types import Child_Prop
-from core.node.virtual import Node
+from ..core.node.component import component
+from ..core.node.tk import TKNode
+from ..core.node.types import Child_Prop
+from ..core.node.virtual import Node
 
 @component
 def Table[T](

@@ -1,12 +1,12 @@
 import tkinter as tk
 from typing import Any, Callable, Iterable, Sequence
 
-from core.helper import Diff, computed, effect
-from core.node.component import component
-from core.node.tk import TKNode
-from core.node.types import Child_Prop, Children
-from core.node.virtual import Node, VirtualNode
-from core.signal import ReadonlySignal
+from ..core.helper import Diff, computed, effect
+from ..core.node.component import component
+from ..core.node.tk import TKNode
+from ..core.node.types import Child_Prop, Children
+from ..core.node.virtual import Node, VirtualNode
+from ..core.signal import ReadonlySignal
 
 @component
 def Foreach[T](

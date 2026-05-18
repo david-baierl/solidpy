@@ -1,11 +1,11 @@
-from components.button import Button
-from components.dialog import DIALOG_CONTEXT, create_dialog
-from components.frame import Frame
-from components.label import Label
-from core.context import Context, ctx
-from core.helper import computed
-from core.node.component import component
-from core.signal import Signal
+from lib.components.button import Button
+from lib.components.dialog import DIALOG_CONTEXT, create_dialog
+from lib.components.frame import Frame
+from lib.components.label import Label
+from lib.core.context import Context, ctx
+from lib.core.helper import computed
+from lib.core.node.component import component
+from lib.core.signal import Signal
 
 @component
 def App():

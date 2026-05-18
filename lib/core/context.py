@@ -1,8 +1,8 @@
 from contextlib import contextmanager
 from typing import Any
 
-from core.event.node import EventNode
-from core.injectable import Injectable
+from .event.node import EventNode
+from .injectable import Injectable
 
 INTERNAL_CURRENT_CONTEXT_SCOPE: Context | None = None
 

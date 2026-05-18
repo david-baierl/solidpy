@@ -1,6 +1,6 @@
 from typing import Any
 
-from core.event.event import Event, EventEmitter
+from .event import Event, EventEmitter
 
 class EventNode[P: EventNode[Any] = EventNode](EventEmitter):
     _parent: P | None

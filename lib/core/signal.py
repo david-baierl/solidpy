@@ -1,6 +1,6 @@
 from typing import Callable
 
-from core.event.subject import Subject
+from .event.subject import Subject
 
 # ---------------------------------------------------------------------------- #
 # readonly signal (base class)
